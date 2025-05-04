@@ -1,94 +1,160 @@
-/* style.css */
-
+/* Body styling - Center content perfectly */
 body {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* Blue-black tone */
-    color: #ffffff;
     min-height: 100vh;
-}
-
-/* Center everything nicely */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* Navbar style */
-.navbar {
-    background-color: #1b1b1b;
-    padding: 15px 30px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
-.navbar a {
+/* Form container */
+.form-container {
+    background-color: #1e1e1e;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.form-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Heading */
+.form-container h2 {
+    margin-bottom: 30px;
     color: #00bcd4;
-    text-decoration: none;
-    margin-left: 20px;
+    font-size: 26px;
     font-weight: bold;
 }
 
-.navbar a:hover {
-    color: #ffffff;
+/* Input group for floating label effect */
+.input-group {
+    position: relative;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 10px 14px 10px;
+    border: none;
+    border-bottom: 2px solid #555;
+    background: transparent;
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #00bcd4;
+    outline: none;
+}
+
+.input-group label {
+    position: absolute;
+    left: 10px;
+    top: 14px;
+    color: #aaa;
+    font-size: 16px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus ~ label,
+.input-group input:valid ~ label {
+    top: -10px;
+    left: 5px;
+    font-size: 13px;
+    color: #00bcd4;
+    background-color: #1e1e1e;
+    padding: 0 4px;
+}
+
+/* Submit button */
+.form-container button {
+    width: 100%;
+    padding: 14px;
+    background-color: #00bcd4;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
+}
+
+.form-container button:hover {
+    background-color: #0097a7;
+    transform: translateY(-2px);
+}
+
+.form-container button:active {
+    transform: translateY(1px);
+}
+
+/* Error message */
+.form-container .error {
+    color: #ff4d4d;
+    margin-bottom: 20px;
+    font-size: 14px;
+    background-color: #3b1e1e;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* Link styling */
+.form-container a {
+    color: #00bcd4;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+.form-container a:hover {
     text-decoration: underline;
 }
 
-/* Title style */
-h1 {
-    text-align: center;
-    margin-top: 30px;
-    font-size: 3rem;
-    color: #00bcd4;
-}
-
-/* Listing posts area */
-.listings {
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-/* Each listing box */
-.listing {
-    background-color: #292929;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
-    transition: 0.3s;
-}
-
-.listing:hover {
-    transform: scale(1.03);
-}
-
-.listing img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+/* Back button styling */
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 16px;
+    background-color: #ff5722; /* Primary color */
+    color: #fff;
+    text-decoration: none;
     border-radius: 8px;
-}
-
-.listing h2 {
-    margin: 15px 0 10px;
-    font-size: 1.5rem;
-    color: #00bcd4;
-}
-
-.listing p {
-    font-size: 1rem;
-    color: #cccccc;
-}
-
-/* Footer */
-footer {
+    border: 2px solid transparent;
     text-align: center;
-    padding: 20px;
-    margin-top: 50px;
-    color: #aaaaaa;
-    font-size: 0.9rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+}
+
+/* Hover effect */
+.back-button:hover {
+    background-color: #e64a19; /* Darker shade */
+    transform: translateY(-2px);
+}
+
+/* Active state for back button */
+.back-button:active {
+    transform: translateY(1px);
+}
+
+/* Focus state for accessibility */
+.back-button:focus {
+    outline: none;
+    box-shadow: 0 0 3px 2px rgba(255, 87, 34, 0.5); /* Focus indicator */
 }

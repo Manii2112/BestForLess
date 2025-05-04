@@ -31,21 +31,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Login - BestForLess</title>
-    <link rel="stylesheet" href="css/style.css"> <!-- Linking your CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<form method="post">
+<div class="form-container">
     <h2>Login</h2>
-    
+
     <?php if (isset($error)): ?>
-        <p style="color:red;"><?= $error ?></p>
+        <p class="error"><?= $error ?></p>
     <?php endif; ?>
-    
-    <input name="email" type="email" placeholder="Email" required><br>
-    <input name="password" type="password" placeholder="Password" required><br>
-    <button type="submit">Login</button>
-</form>
+
+    <form method="post" novalidate>
+        <div class="input-group">
+            <input type="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" />
+            <label>Email</label>
+        </div>
+        <div class="input-group">
+            <input type="password" name="password" required />
+            <label>Password</label>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+
+    <!-- Back Button -->
+    <a href="index.php" class="back-button">Back to Home</a>
+
+</div>
 
 </body>
 </html>
