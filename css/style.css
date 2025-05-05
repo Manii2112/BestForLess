@@ -126,35 +126,87 @@ body {
     text-decoration: underline;
 }
 
-/* Back button styling */
-.back-button {
+/.back-button {
     display: inline-block;
     margin-top: 20px;
-    padding: 12px 25px;
+    padding: 14px 0; /* Adjusted to match Signup button */
     font-size: 16px;
-    background-color: #ff5722; /* Primary color */
-    color: #fff;
+    background-color: #00bcd4; /* Match Signup button */
+    color: #fff; /* Match Signup button text color */
     text-decoration: none;
     border-radius: 8px;
-    border: 2px solid transparent;
+    border: none; /* Removed border for consistency */
     text-align: center;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
     width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
 }
 
-/* Hover effect */
 .back-button:hover {
-    background-color: #e64a19; /* Darker shade */
+    background-color: #00a5bb;
+    color: #fff;
     transform: translateY(-2px);
 }
 
-/* Active state for back button */
 .back-button:active {
     transform: translateY(1px);
 }
 
-/* Focus state for accessibility */
 .back-button:focus {
     outline: none;
-    box-shadow: 0 0 3px 2px rgba(255, 87, 34, 0.5); /* Focus indicator */
+    box-shadow: 0 0 3px 2px rgba(0, 188, 212, 0.5);
+}
+/* Textarea styling with floating label */
+.input-group textarea {
+    width: 100%;
+    padding: 14px 10px 14px 10px;
+    border: none;
+    border-bottom: 2px solid #555;
+    background: transparent;
+    color: #fff;
+    font-size: 16px;
+    resize: vertical;
+    transition: all 0.3s ease;
+    height: 100px;
+    box-sizing: border-box;
+}
+
+.input-group textarea:focus {
+    border-color: #00bcd4;
+    outline: none;
+}
+
+.input-group textarea:focus ~ label,
+.input-group textarea:valid ~ label {
+    top: -10px;
+    left: 5px;
+    font-size: 13px;
+    color: #00bcd4;
+    background-color: #1e1e1e;
+    padding: 0 4px;
+}
+
+/* File input (image upload) styling */
+.input-group input[type="file"] {
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    background-color: transparent;
+    padding: 5px 0;
+}
+
+.input-group input[type="file"]::file-selector-button {
+    background-color: #00bcd4;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    margin-right: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.input-group input[type="file"]::file-selector-button:hover {
+    background-color: #0097a7;
 }

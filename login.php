@@ -6,22 +6,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $pass = $_POST['password'];
 
-    $query = "SELECT * FROM users WHERE email = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $res = $stmt->get_result();
-
-    if ($user = $res->fetch_assoc()) {
-        if (password_verify($pass, $user['password'])) {
-            $_SESSION['user_id'] = $user['id'];
-            header("Location: index.php");
-            exit();
-        } else {
-            $error = "Invalid password!";
-        }
+    // ✅ Server-side validation to prevent empty form submission
+    if (empty($email) || empty($pass)) {
+        $error = "Please fill in all fields.";
     } else {
-        $error = "User not found!";
+        $query = "SELECT * FROM users WHERE email = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        if ($user = $res->fetch_assoc()) {
+            if (password_verify($pass, $user['password'])) {
+                $_SESSION['user_id'] = $user['id'];
+                header("Location: index.php");
+                exit();
+            } else {
+                $error = "Invalid password!";
+            }
+        } else {
+            $error = "User not found!";
+        }
     }
 }
 ?>
@@ -55,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
 
     <!-- Back Button -->
-    <a href="index.php" class="back-button">Back to Home</a>
+    <a href="index.php" class="back-button">← Back to Home</a>
 
 </div>
 

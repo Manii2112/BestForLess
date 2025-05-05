@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
 
     <!-- Back Button -->
-    <a href="index.php" class="back-button">Back to Home</a>
+    <a href="index.php" class="back-button">← Back to Home</a>
 
 </div>
 
