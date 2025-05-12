@@ -126,7 +126,7 @@ body {
     text-decoration: underline;
 }
 
-/.back-button {
+.back-button {
     display: inline-block;
     margin-top: 20px;
     padding: 14px 0; /* Adjusted to match Signup button */
@@ -157,6 +157,7 @@ body {
     outline: none;
     box-shadow: 0 0 3px 2px rgba(0, 188, 212, 0.5);
 }
+
 /* Textarea styling with floating label */
 .input-group textarea {
     width: 100%;
@@ -209,4 +210,318 @@ body {
 
 .input-group input[type="file"]::file-selector-button:hover {
     background-color: #0097a7;
+}
+
+/* Listings Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Individual Listing Card */
+.product-card {
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+/* Image container for consistent image layout */
+.product-image-container {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    background-color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Listing Image */
+.product-image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+
+
+/* Info Section */
+.product-info {
+    padding: 1rem;
+    color: #fff;
+}
+
+
+
+/* Price */
+.product-price {
+    font-size: 1rem;
+    color: #ffcc00;
+    font-weight: 500;
+}
+/* Carousel Container */
+.carousel-container {
+    display: flex; /* Ensure items are in a row */
+    gap: 1.5rem; /* Optional: space between items */
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 2rem 1rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+}
+
+.carousel-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+/* Each card in the carousel */
+.carousel-item {
+    flex: 0 0 auto; /* Prevent shrinking */
+    width: 220px;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    scroll-snap-align: start;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+
+/* Image inside the carousel */
+.carousel-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    background-color: #111;
+}
+
+/* Base Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Global Styles */
+body {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+    min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1e1e1e;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar .logo h2 {
+    color: #00bcd4;
+    margin: 0;
+}
+
+.navbar .links a.btn {
+    margin-left: 1rem;
+    background-color: #00bcd4;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.navbar .links a.btn:hover {
+    background-color: #0097a7;
+    transform: translateY(-2px);
+}
+
+/* Hero Section */
+.container.hero {
+    text-align: center;
+    padding: 4rem 2rem 2rem;
+    color: #fff;
+}
+
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.hero-title span {
+    color: #00bcd4;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    color: #ccc;
+}
+
+/* Listings Grid */
+.listing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Shared Card Styles */
+.listing-card,
+.carousel-item {
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.listing-card:hover,
+.carousel-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.listing-card img,
+.carousel-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background-color: #111;
+}
+
+.listing-info,
+.carousel-info {
+    padding: 1rem;
+    text-align: center;
+}
+
+.listing-info h3,
+.carousel-info h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.listing-info p,
+.carousel-info p {
+    color: #ffcc00;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+/* Carousel Container */
+.carousel-container {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 2rem 1rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.carousel-container::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-item {
+    flex: 0 0 auto;
+    width: 220px;
+    scroll-snap-align: start;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    color: #ccc;
+    font-size: 0.9rem;
+    padding: 2rem 1rem;
+    background-color: #111;
+    margin-top: 3rem;
+}
+
+/* Optional: Add responsiveness for small screens */
+@media (max-width: 600px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar .links {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+/* Search bar styling */
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    gap: 10px;
+}
+
+.search-form input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+}
+
+.search-form button {
+    padding: 10px 20px;
+    background-color: #00d084;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.search-form button:hover {
+    background-color: #00a76d;
 }
