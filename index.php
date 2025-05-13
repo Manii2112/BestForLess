@@ -16,9 +16,11 @@ if (isset($_GET['query'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BestForLess</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
+        /* Base Styles */
         body {
             background: #121212;
             color: #fff;
@@ -27,6 +29,7 @@ if (isset($_GET['query'])) {
             padding: 0;
         }
 
+        /* Navbar - Fixed Alignment */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -34,27 +37,59 @@ if (isset($_GET['query'])) {
             background: #1e1e1e;
             padding: 15px 30px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            position: relative;
         }
 
         .logo h2 {
             margin: 0;
             color: #1abc9c;
+            font-size: 1.5rem;
         }
 
-        .links .btn {
-            margin-left: 15px;
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 8px;
             text-decoration: none;
-            color: #1abc9c;
-            font-weight: bold;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
+        .login-btn {
+            color: #1abc9c;
+            border: 1px solid #1abc9c;
+        }
+
+        .login-btn:hover {
+            background-color: rgba(26, 188, 156, 0.1);
+        }
+
+        .signup-btn {
+            background-color: #1abc9c;
+            color: white;
+        }
+
+        .signup-btn:hover {
+            background-color: #169d86;
+        }
+
+        /* Hero Section */
         .container.hero {
             text-align: center;
             padding: 40px 20px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .hero-title {
-            font-size: 2rem;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
         }
 
         .hero-title span {
@@ -62,8 +97,9 @@ if (isset($_GET['query'])) {
         }
 
         .hero-subtitle {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: #ccc;
+            margin-bottom: 30px;
         }
 
         /* Search Bar */
@@ -73,15 +109,18 @@ if (isset($_GET['query'])) {
             margin: 20px auto;
             gap: 10px;
             padding: 0 20px;
+            max-width: 600px;
         }
 
         .search-form input[type="text"] {
-            padding: 10px;
-            width: 300px;
+            padding: 10px 15px;
+            width: 100%;
             border-radius: 8px;
             border: none;
             outline: none;
             font-size: 1rem;
+            background: #2d2d2d;
+            color: white;
         }
 
         .search-form button {
@@ -92,17 +131,21 @@ if (isset($_GET['query'])) {
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
+            transition: background-color 0.2s;
         }
 
         .search-form button:hover {
             background-color: #169d86;
         }
 
+        /* Listings Grid */
         .listing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            padding: 20px 40px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .listing-card {
@@ -110,61 +153,138 @@ if (isset($_GET['query'])) {
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-            transition: transform 0.2s;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .listing-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.6);
         }
 
         .listing-card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
+            border-bottom: 1px solid #333;
         }
 
         .listing-info {
-            padding: 10px 15px;
+            padding: 15px;
         }
 
         .listing-info h3 {
-            margin: 0;
+            margin: 0 0 8px;
             font-size: 1.1rem;
             color: #fff;
         }
 
         .listing-info p {
-            margin: 8px 0 0;
+            margin: 0;
             font-weight: bold;
             color: #1abc9c;
+            font-size: 1rem;
         }
 
+        /* User Controls */
+        .user-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .user-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .post-btn {
+            background-color: #1abc9c;
+            color: white;
+        }
+
+        .post-btn:hover {
+            background-color: #169d86;
+        }
+
+        .logout-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .logout-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Footer */
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 30px 20px;
             font-size: 0.9rem;
             background: #1a1a1a;
             color: #aaa;
+            margin-top: 40px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .nav-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .listing-grid {
+                grid-template-columns: 1fr;
+                padding: 15px;
+            }
+            
+            .user-controls {
+                position: static;
+                justify-content: center;
+                margin-top: 15px;
+            }
         }
     </style>
 </head>
 <body>
 
+<!-- User Controls (Top Right) -->
+<?php if (isset($_SESSION['user_id'])): ?>
+    <div class="user-controls">
+        <a href="upload_listing.php" class="user-btn post-btn">Post Listing</a>
+        <a href="logout.php" class="user-btn logout-btn">Logout</a>
+    </div>
+<?php endif; ?>
+
 <!-- Navigation Bar -->
-<div class="navbar">
+<nav class="navbar">
     <div class="logo">
         <h2>BestForLess</h2>
     </div>
-    <div class="links">
-        <?php if (isset($_SESSION['user_id'])): ?>
-            <a href="upload_listing.php" class="btn">Post New Listing</a>
-            <a href="logout.php" class="btn">Logout</a>
-        <?php else: ?>
-            <a href="login.php" class="btn">Login</a>
-            <a href="signup.php" class="btn">Sign Up</a>
+    
+    <div class="nav-buttons">
+        <?php if (!isset($_SESSION['user_id'])): ?>
+            <a href="login.php" class="btn login-btn">Login</a>
+            <a href="signup.php" class="btn signup-btn">Sign Up</a>
         <?php endif; ?>
     </div>
-</div>
+</nav>
 
 <!-- Hero Section -->
 <div class="container hero">
@@ -193,13 +313,13 @@ if (isset($_GET['query'])) {
             </div>
         <?php endwhile; ?>
     <?php else: ?>
-        <p style="text-align: center; color: #888;">No listings found.</p>
+        <p style="grid-column: 1/-1; text-align: center; color: #888;">No listings found.</p>
     <?php endif; ?>
 </div>
 
 <!-- Footer -->
 <footer>
-    &copy; 2025 BestForLess | Made for MMU Students ❤️
+    &copy; 2025 BestForLess | Made for MMU Students
 </footer>
 
 </body>
