@@ -486,3 +486,61 @@ footer {
         max-width: 100%;
     }
 }
+/* === Listing Details Section === */
+.listing-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #2c2c2c;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    color: #fff;
+}
+
+.listing-container h2 {
+    font-size: 28px;
+    color: #00d9ff;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #00d9ff;
+    padding-bottom: 10px;
+}
+
+.listing-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.listing-price {
+    font-size: 24px;
+    color: #ff8c00;
+    font-weight: bold;
+    margin: 10px 0 20px 0;
+}
+
+.listing-description {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    color: #d3d3d3;
+}
+
+.contact-seller-btn {
+    display: inline-block;
+    padding: 12px 22px;
+    background-color: #00d9ff;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.contact-seller-btn:hover {
+    background-color: #009ec3;
+    transform: scale(1.05);
+    color: #fff;
+}

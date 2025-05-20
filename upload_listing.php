@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 $successMessage = '';
 $errorMessage = '';
 
-// Handle search bar input (optional future use)
+// Handle search bar input
 $searchQuery = '';
 if (isset($_GET['query'])) {
     $searchQuery = htmlspecialchars($_GET['query']);
@@ -20,32 +20,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $title = htmlspecialchars($_POST['title']);
     $desc = htmlspecialchars($_POST['description']);
     $price = $_POST['price'];
-    
-    // Handle image upload
+    $condition = $_POST['condition'];
+    $category = $_POST['category'];
+
     $image = $_FILES['image']['name'];
     $tmp = $_FILES['image']['tmp_name'];
     $imageType = pathinfo($image, PATHINFO_EXTENSION);
-    
-    // Validate image type and size
+
     $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
-    $maxSize = 2 * 1024 * 1024; // 2MB
+    $maxSize = 2 * 1024 * 1024;
 
     if (!in_array($imageType, $allowedTypes)) {
         $errorMessage = 'Only JPG, JPEG, PNG, and GIF files are allowed.';
     } elseif ($_FILES['image']['size'] > $maxSize) {
         $errorMessage = 'Image size must be less than 2MB.';
     } else {
-        // Move the image to the uploads folder
         $targetDir = "uploads/";
         $targetFile = $targetDir . basename($image);
         if (move_uploaded_file($tmp, $targetFile)) {
-            // Insert into the database
-            $query = "INSERT INTO listings (user_id, title, description, price, image) VALUES (?, ?, ?, ?, ?)";
+            $query = "INSERT INTO listings (user_id, title, description, price, image, `condition`, category) 
+                      VALUES (?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($query);
-            $stmt->bind_param("issds", $_SESSION['user_id'], $title, $desc, $price, $image);
+            $stmt->bind_param("issdsss", $_SESSION['user_id'], $title, $desc, $price, $image, $condition, $category);
             if ($stmt->execute()) {
                 $successMessage = 'Your listing has been posted successfully!';
-                header("Location: index.php"); // Redirect after posting
+                header("Location: index.php");
                 exit;
             } else {
                 $errorMessage = 'There was an error posting your listing.';
@@ -97,7 +96,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     .input-group input,
-    .input-group textarea {
+    .input-group textarea,
+    .input-group select {
       width: 100%;
       padding: 10px 10px 10px 0;
       border: none;
@@ -193,13 +193,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <div class="form-container">
   <h2>Post a Listing</h2>
-  
+
   <?php if ($successMessage): ?>
     <div class="message success"><?= $successMessage; ?></div>
   <?php elseif ($errorMessage): ?>
     <div class="message error"><?= $errorMessage; ?></div>
   <?php endif; ?>
-  
+
   <form method="post" enctype="multipart/form-data">
     <div class="input-group">
       <input type="text" name="title" required>
@@ -212,6 +212,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="input-group">
       <textarea name="description" rows="4" required></textarea>
       <label>Description</label>
+    </div>
+    <div class="input-group">
+      <select name="condition" required>
+        <option value="" disabled selected>Select Condition</option>
+        <option value="Brand new">Brand new</option>
+        <option value="Like new">Like new</option>
+        <option value="Used">Used</option>
+        <option value="Well-worn">Well-worn</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <select name="category" required>
+        <option value="" disabled selected>Select Category</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Furniture">Furniture</option>
+        <option value="Books">Books</option>
+        <option value="Accessories">Accessories</option>
+        <option value="Others">Others</option>
+      </select>
     </div>
     <div class="input-group">
       <input type="file" name="image" required>

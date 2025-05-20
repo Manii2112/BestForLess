@@ -303,14 +303,32 @@ if (isset($_GET['query'])) {
     <?php if ($res && $res->num_rows > 0): ?>
         <?php while ($row = $res->fetch_assoc()): ?>
             <div class="listing-card">
-                <a href="listing_detail.php?id=<?= $row['id'] ?>" style="text-decoration: none; color: inherit;">
-                    <img src="uploads/<?= htmlspecialchars($row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
-                    <div class="listing-info">
-                        <h3><?= htmlspecialchars($row['title']) ?></h3>
-                        <p>RM <?= number_format($row['price'], 2) ?></p>
-                    </div>
-                </a>
-            </div>
+    <a href="listing_detail.php?id=<?= $row['id'] ?>" style="text-decoration: none; color: inherit;">
+        <img src="uploads/<?= htmlspecialchars($row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+        <div class="listing-info">
+            <h3><?= htmlspecialchars($row['title']) ?></h3>
+            <p>RM <?= number_format($row['price'], 2) ?></p>
+        </div>
+    </a>
+
+    <?php if (isset($_SESSION['user_id'])): ?>
+        <form action="add_to_cart.php" method="post" style="padding: 10px;">
+            <input type="hidden" name="listing_id" value="<?= $row['id'] ?>">
+            <button type="submit" style="
+                width: 100%;
+                padding: 10px;
+                background-color: #1abc9c;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                font-weight: bold;
+                cursor: pointer;
+                margin-top: 10px;
+            ">Add to Cart</button>
+        </form>
+    <?php endif; ?>
+</div>
+
         <?php endwhile; ?>
     <?php else: ?>
         <p style="grid-column: 1/-1; text-align: center; color: #888;">No listings found.</p>
