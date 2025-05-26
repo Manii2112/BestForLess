@@ -20,7 +20,7 @@ if (isset($_GET['query'])) {
     <title>BestForLess</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Base Styles */
+        /* Your CSS remains unchanged for brevity */
         body {
             background: #121212;
             color: #fff;
@@ -29,7 +29,6 @@ if (isset($_GET['query'])) {
             padding: 0;
         }
 
-        /* Navbar - Fixed Alignment */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -79,7 +78,6 @@ if (isset($_GET['query'])) {
             background-color: #169d86;
         }
 
-        /* Hero Section */
         .container.hero {
             text-align: center;
             padding: 40px 20px 20px;
@@ -102,7 +100,6 @@ if (isset($_GET['query'])) {
             margin-bottom: 30px;
         }
 
-        /* Search Bar */
         .search-form {
             display: flex;
             justify-content: center;
@@ -138,7 +135,6 @@ if (isset($_GET['query'])) {
             background-color: #169d86;
         }
 
-        /* Listings Grid */
         .listing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -185,7 +181,6 @@ if (isset($_GET['query'])) {
             font-size: 1rem;
         }
 
-        /* User Controls */
         .user-controls {
             position: absolute;
             top: 15px;
@@ -222,7 +217,15 @@ if (isset($_GET['query'])) {
             background-color: #c0392b;
         }
 
-        /* Footer */
+        .cart-btn {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .cart-btn:hover {
+            background-color: #2980b9;
+        }
+
         footer {
             text-align: center;
             padding: 30px 20px;
@@ -232,28 +235,27 @@ if (isset($_GET['query'])) {
             margin-top: 40px;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
                 gap: 15px;
                 padding: 15px;
             }
-            
+
             .nav-buttons {
                 width: 100%;
                 justify-content: center;
             }
-            
+
             .hero-title {
                 font-size: 2rem;
             }
-            
+
             .listing-grid {
                 grid-template-columns: 1fr;
                 padding: 15px;
             }
-            
+
             .user-controls {
                 position: static;
                 justify-content: center;
@@ -267,6 +269,7 @@ if (isset($_GET['query'])) {
 <!-- User Controls (Top Right) -->
 <?php if (isset($_SESSION['user_id'])): ?>
     <div class="user-controls">
+        <a href="cart.php" class="user-btn cart-btn">View Cart</a>
         <a href="upload_listing.php" class="user-btn post-btn">Post Listing</a>
         <a href="logout.php" class="user-btn logout-btn">Logout</a>
     </div>
@@ -277,7 +280,7 @@ if (isset($_GET['query'])) {
     <div class="logo">
         <h2>BestForLess</h2>
     </div>
-    
+
     <div class="nav-buttons">
         <?php if (!isset($_SESSION['user_id'])): ?>
             <a href="login.php" class="btn login-btn">Login</a>
@@ -303,32 +306,31 @@ if (isset($_GET['query'])) {
     <?php if ($res && $res->num_rows > 0): ?>
         <?php while ($row = $res->fetch_assoc()): ?>
             <div class="listing-card">
-    <a href="listing_detail.php?id=<?= $row['id'] ?>" style="text-decoration: none; color: inherit;">
-        <img src="uploads/<?= htmlspecialchars($row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
-        <div class="listing-info">
-            <h3><?= htmlspecialchars($row['title']) ?></h3>
-            <p>RM <?= number_format($row['price'], 2) ?></p>
-        </div>
-    </a>
+                <a href="listing_detail.php?id=<?= $row['id'] ?>" style="text-decoration: none; color: inherit;">
+                    <img src="uploads/<?= htmlspecialchars($row['image']) ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                    <div class="listing-info">
+                        <h3><?= htmlspecialchars($row['title']) ?></h3>
+                        <p>RM <?= number_format($row['price'], 2) ?></p>
+                    </div>
+                </a>
 
-    <?php if (isset($_SESSION['user_id'])): ?>
-        <form action="add_to_cart.php" method="post" style="padding: 10px;">
-            <input type="hidden" name="listing_id" value="<?= $row['id'] ?>">
-            <button type="submit" style="
-                width: 100%;
-                padding: 10px;
-                background-color: #1abc9c;
-                color: white;
-                border: none;
-                border-radius: 8px;
-                font-weight: bold;
-                cursor: pointer;
-                margin-top: 10px;
-            ">Add to Cart</button>
-        </form>
-    <?php endif; ?>
-</div>
-
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <form action="add_to_cart.php" method="post" style="padding: 10px;">
+                        <input type="hidden" name="listing_id" value="<?= $row['id'] ?>">
+                        <button type="submit" style="
+                            width: 100%;
+                            padding: 10px;
+                            background-color: #1abc9c;
+                            color: white;
+                            border: none;
+                            border-radius: 8px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            margin-top: 10px;
+                        ">Add to Cart</button>
+                    </form>
+                <?php endif; ?>
+            </div>
         <?php endwhile; ?>
     <?php else: ?>
         <p style="grid-column: 1/-1; text-align: center; color: #888;">No listings found.</p>
