@@ -271,9 +271,11 @@ if (isset($_GET['query'])) {
     <div class="user-controls">
         <a href="cart.php" class="user-btn cart-btn">View Cart</a>
         <a href="upload_listing.php" class="user-btn post-btn">Post Listing</a>
+        <a href="profile.php" class="user-btn" style="background-color:#9b59b6; color:white;">Profile</a>
         <a href="logout.php" class="user-btn logout-btn">Logout</a>
     </div>
 <?php endif; ?>
+
 
 <!-- Navigation Bar -->
 <nav class="navbar">
